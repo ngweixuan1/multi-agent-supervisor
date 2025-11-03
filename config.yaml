@@ -1,0 +1,13 @@
+
+# All parts
+extracted_text_path: "./data/extracted_text.json"
+gemini_model:  "gemini-2.5-flash"
+
+# Part 1
+pdf_fp: "./data/fy2024_analysis_of_revenue_and_expenditure.pdf"
+extracted_field_path: "./data/extracted_field.json"
+target_pages_part_1: [5, 6, 8, 20]
+
+# Part 2
+target_pages_part_2: [1, 36]
+output_dir: "./data"
