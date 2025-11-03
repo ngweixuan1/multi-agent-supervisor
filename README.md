@@ -24,20 +24,19 @@ Each stage is modular, enabling future extension to APIs, Docker deployments, or
 - A virtual environment (`venv` or `conda`) is strongly recommended.
 
 ### Installation Steps
-```bash
-git clone https://github.com/<your-username>/budget-2024-extraction.git
-cd budget-2024-extraction
 
 # Create and activate environment
 
 ```bash
 python -m venv venv
 source venv/bin/activate 
+```
 
 # Install dependencies
 
 ```bash
 pip install -r requirements.txt
+```
 
 #Environment Configuration
 
@@ -48,6 +47,7 @@ GOOGLE_API_KEY="your-google-api-key"
 LANGCHAIN_TRACING_V2="true"
 LANGCHAIN_PROJECT="budget-2024-pipeline"
 LANGCHAIN_API_KEY="your-langchain-api-key"
+```
 
 # Configuration File (config.yaml)
 
@@ -59,6 +59,7 @@ extracted_text_path: "outputs/extracted_text.json"
 target_pages_part_2:
   - 1
   - 36
+```
 
 # 2. Execution Workflow
 ## 2.1 Part 1 — Document Parsing and Extraction
@@ -67,6 +68,7 @@ target_pages_part_2:
 
 ```bash
 python -m chains.parse
+```
 
 Outputs:
 
@@ -76,6 +78,7 @@ Outputs:
 
 ```bash
 python -m chains.field_extraction_chain
+```
 
 Outputs Example:
 
@@ -89,11 +92,13 @@ Outputs Example:
   "operating_revenue_taxes_list": ["Corporate Income Tax", "Personal Income Tax", "GST"],
   "latest_actual_fiscal_position_billion": 3.6
 }
+```
 
 ## 2.2 Part 2 — Date Normalization and Reasoning
 
 ```bash
 python -m chains.normalize_date_chain
+```
 
 This step calls a FastMCP local server tool normalize_date to convert textual dates into ISO format.
 
@@ -104,6 +109,7 @@ Outputs Example:
   {"original_text": "Distributed on Budget Day: 16 February 2024", "normalized_date": "2024-02-16"},
   {"original_text": "Estate Duty abolished with effect from 15 February 2008", "normalized_date": "2008-02-15"}
 ]
+```
 
 Using structured prompting, each normalized date is compared against a reference (2024-01-01) and classified as:
 
@@ -117,6 +123,7 @@ Using structured prompting, each normalized date is compared against a reference
 
 ```bash
 python -m chains.qa_chain --query "What are the key government revenue streams, and how will the Budget for the Future Energy Fund be supported?"
+```
 
 - This command launches a LangGraph-based multi-agent system where:
 
