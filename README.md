@@ -59,12 +59,15 @@ extracted_text_path: "outputs/extracted_text.json"
 target_pages_part_2:
   - 1
   - 36
+pdf_fp: "./data/fy2024_analysis_of_revenue_and_expenditure.pdf" # Your input file
 ```
 
 # 2. Execution Workflow
 ## 2.1 Part 1 — Document Parsing and Extraction
 
 ### Step 1.1 Parse PDF
+
+Ensure you have configured your input file path at pdf_fp: "./data/fy2024_analysis_of_revenue_and_expenditure.pdf"
 
 ```bash
 python -m chains.parse
